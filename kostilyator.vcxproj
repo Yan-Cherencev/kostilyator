@@ -127,7 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="hable.cpp" />
     <ClCompile Include="kostilyator.cpp" />
+    <ClCompile Include="lexan.cpp" />
+    <ClCompile Include="token.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\hable\dvaque.h" />
+    <ClInclude Include="hable.h" />
+    <ClInclude Include="lexan.h" />
+    <ClInclude Include="token.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,20 +1,70 @@
-﻿// kostilyator.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include <iostream>
+#include <fstream>
+#include <string>
 
-#include <iostream>
+//#include "dvaque.h"
+#include "lexan.h"
+#include "hable.h"
 
-int main()
-{
-    std::cout << "Hello World!\n";
+
+int main(){
+    //std::cout << "Hello World!\n";
+    lexan analizator;
+    hable<std::string,token, hash1> lexems;
+
+    std::ifstream in("in.txt");
+
+    /*if (!in.is_open()) {
+        std::cout << "File is not found\n";
+        return 0;
+    }*/
+
+    std::ofstream out("out.txt");
+
+    /*if (!out.is_open()) {
+        std::cout << "File is not found\n";
+        return 0;
+    }*/
+
+    std::string temp;
+    size_t line_num = 1;
+    while (std::getline(in, temp)) {
+        analizator.load(temp);
+
+        token cur_token;
+
+        while ((cur_token = analizator.get_next_token()).type != END_OF_FILE) {
+            
+
+            if (cur_token.type == ERROR) {
+                out << "Error on line " << line_num << ": Invalid token <<" << cur_token.value << ">>\n";
+            }
+            else {
+                lexems[cur_token.value] = cur_token;
+            }
+        }
+        ++line_num;
+    }
+
+    //hable<int, int> a;
+
+    /*for (int i = 0; i < 1000; ++i) {
+        a[i] = i;
+        std::cout <<i<<' ' << a.index(i) << '\n';
+    }*/
+
+    dvaque<hable<std::string, token, hash1>::para> lexeme_list = lexems.get_all();
+
+    for (size_t i = 0; i < lexeme_list.size(); ++i) {
+        const token& t = lexeme_list[i].val;
+        out << t.type << " | " << t.value << " | " << lexems.index(t.value) << "\n";
+    }
+
+
+    in.close();
+    out.close();
+    
+    std::cout << "Success\n";
+    return 0;
 }
 
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.

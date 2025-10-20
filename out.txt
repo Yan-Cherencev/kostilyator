@@ -1,0 +1,13 @@
+PUNCTUATOR | ; | 0
+OPERATOR | = | 2
+INTEGER_LIT | 10 | 4
+OPERATOR | + | 10
+KEYWORD | float | 11
+ID | a | 12
+ID | one | 13
+FLOAT_LIT | 5000.230124 | 14
+ID | qvas_g | 16
+INTEGER_LIT | 1 | 16
+END | end | 16
+PROGRAM | program | 17
+KEYWORD | int | 20
