@@ -5,12 +5,12 @@
 
 lexan::lexan():position(0) {
 
-    keywords["program"] = PROGRAM;
-    keywords["end"] = END;
-    keywords["call"] = CALL;
-    keywords["int"] = KEYWORD;
-    keywords["float"] = KEYWORD;
-    keywords["const"] = CONST;
+    keywords["PROGRAM"] = PROGRAM;
+    keywords["END"] = END;
+    keywords["CALL"] = CALL;
+    keywords["INT"] = KEYWORD;
+    keywords["REAL"] = KEYWORD;
+    keywords["CONST"] = CONST;
 
 
     /*keywords["program"] = token(token_type::PROGRAM, "program");
@@ -94,8 +94,7 @@ token lexan::get_next_token(){
 
     ++position;
 
-    switch (current)
-    {
+    switch (current){
         case ',': return token(PUNCTUATOR, ",");
         case '(': return token(PUNCTUATOR, "(");
         case ')': return token(PUNCTUATOR, ")");
@@ -138,6 +137,11 @@ token lexan::get_num(){
     if (type != nullptr) {
         return token(*type, word);
     }*/
+
+    if (buffer[start] == '0'&&num.size()>1) {
+        return token(ERROR, num);
+    }
+
     if (is_float) {
         return token(FLOAT_LIT, num);
     }
