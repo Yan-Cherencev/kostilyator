@@ -1,4 +1,5 @@
 #pragma once
+
 #include <fstream>
 #include <string>
 
@@ -13,8 +14,8 @@ enum token_type {
     OPERATOR,
     PUNCTUATOR,
 
-
     END_OF_FILE,
+    
 
     UNKNOWN, ERROR
 };
@@ -24,10 +25,11 @@ enum token_type {
 struct token {
     token_type type;
     std::string value;
+    size_t line;
     //и что-то ещё
 
-    token();
-    token(token_type typ /*= token_type::UNKNOWN*/, const std::string& val) :type(typ), value(val) {};
+    token() :type(UNKNOWN), value(""), line(0) {};
+    token(token_type typ /*= token_type::UNKNOWN*/, const std::string& val, size_t line = 0) :type(typ), value(val), line(line) {};
 };
 
 inline std::ostream& operator<<(std::ostream& os, token_type type) {

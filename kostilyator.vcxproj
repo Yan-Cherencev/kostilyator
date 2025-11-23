@@ -127,16 +127,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="drevo.cpp" />
     <ClCompile Include="hable.cpp" />
     <ClCompile Include="kostilyator.cpp" />
     <ClCompile Include="lexan.cpp" />
+    <ClCompile Include="syntex.cpp" />
     <ClCompile Include="token.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\hable\dvaque.h" />
+    <ClInclude Include="drevo.h" />
     <ClInclude Include="hable.h" />
     <ClInclude Include="lexan.h" />
+    <ClInclude Include="syntex.h" />
     <ClInclude Include="token.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="in.txt" />
+    <Text Include="out.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

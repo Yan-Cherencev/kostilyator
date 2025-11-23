@@ -1,3 +1,10 @@
-program one
-int a = 10 + 1 end
-float qvas_g = 5000.230124;
+PROGRAM my_first_prog
+INT a, b, sum
+REAL x, y
+a = 10
+b = 20
+x = 5.5
+sum = a + b
+antysum = a - b
+CALL print(sum)
+END my_first_prog

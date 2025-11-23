@@ -5,12 +5,19 @@
 //#include "dvaque.h"
 #include "lexan.h"
 #include "hable.h"
+#include "syntex.h"
+//#include "hable.h"
+
+
 
 
 int main(){
     //std::cout << "Hello World!\n";
     lexan analizator;
-    hable<std::string,token, hash1> lexems;
+    //hable<std::string,token, hash1> lexems;
+
+    std::vector<token> tokens;
+    std::vector<std::string> synt_errors;
 
     std::ifstream in("in.txt");
 
@@ -37,31 +44,42 @@ int main(){
             
 
             if (cur_token.type == ERROR) {
-                out << "Error on line " << line_num << ": Invalid token <<" << cur_token.value << ">>\n";
+                out << "Lex error on line " << line_num << ": Invalid token <<" << cur_token.value << ">>\n";
             }
             else {
-                lexems[cur_token.value] = cur_token;
+                cur_token.line = line_num;
+                tokens.push_back(cur_token);
             }
         }
         ++line_num;
     }
 
-    //hable<int, int> a;
+    tokens.push_back(token(END_OF_FILE, "", line_num));
+    in.close();
 
-    /*for (int i = 0; i < 1000; ++i) {
-        a[i] = i;
-        std::cout <<i<<' ' << a.index(i) << '\n';
-    }*/
+    syntex synt_analiz(tokens, synt_errors);
 
-    dvaque<hable<std::string, token, hash1>::para> lexeme_list = lexems.get_all();
+    node* root = synt_analiz.start();
 
-    for (size_t i = 0; i < lexeme_list.size(); ++i) {
-        const token& t = lexeme_list[i].val;
-        out << t.type << " | " << t.value << " | " << lexems.index(t.value) << "\n";
+    for (const auto& it : synt_errors) {
+        out << it << '\n';
     }
 
+    if(synt_errors.empty())    {
+        root->print(out);
+    }
 
-    in.close();
+    
+
+    //dvaque<hable<std::string, token, hash1>::para> lexeme_list = lexems.get_all();
+
+    /*for (size_t i = 0; i < lexeme_list.size(); ++i) {
+        const token& t = lexeme_list[i].val;
+        out << t.type << " | " << t.value << " | " << lexems.index(t.value) << "\n";
+    }*/
+
+
+    
     out.close();
     
     std::cout << "Success\n";

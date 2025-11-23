@@ -1,0 +1,59 @@
+Вариант 16
+
+Program → Begin Descriptions Operators End
+Begin → PROGRAM Id
+End → END Id
+Descriptions → Descr | Descr Descriptions
+Operators → Op | Op Operators
+Descr → Type VarList
+Type → INTEGER | REAL
+VarList → Id | Id , VarList
+Op → Id = Expr | CALL Id ( VarList )
+SimpleExpr → Id | Const | ( Expr )
+Expr → SimpleExpr | SimpleExpr + Expr | SimpleExpr - Expr
+Id → id_name
+Const → int_num | real_num
+
+Здесь id_name – слово, состоящее из заглавных и строчных букв латинского алфави-
+та, int_num – слово, представляющее собой целое число, real_num – слово, представ-
+лящее собой вещественное число (два целых числа, разделенных точкой).
+
+изменил правило:
+Expr → SimpleExpr | SimpleExpr + Expr | SimpleExpr - Expr
+
+на 
+Expr → SimpleExpr ExpTail
+ExpTail → + SimpleExpr ExpTail |- SimpleExpr ExpTail | \0
+
+Program → Begin Descriptions Operators End
+Begin → PROGRAM Id
+End → END Id
+Descriptions → Descr | Descr Descriptions
+Operators → Op | Op Operators
+Descr → Type VarList
+Type → INTEGER | REAL
+VarList → Id | Id , VarList
+Op → Id = Expr | CALL Id ( VarList )
+SimpleExpr → Id | Const | ( Expr )
+Expr → SimpleExpr ExpTail
+ExpTail → + SimpleExpr ExpTail |- SimpleExpr ExpTail | \0
+Id → id_name
+Const → int_num | real_num
+
+node* syntex::var_list() {
+    node* node_ = new node("VarList");
+
+
+    node_->add(absorb(ID, "id", "expected  id"));
+
+    if (peek(PUNCTUATOR) && tokens[pos].value == ",") {
+
+        node_->add(absorb(PUNCTUATOR, "punctuator", "Expected <<,>>"));
+        node_->add(var_list());
+
+    }
+
+
+
+    return node_;
+}
