@@ -106,7 +106,7 @@ token lexan::get_next_token(){
         case '/': return token(OPERATOR, "/");
         case '=': return token(OPERATOR, "=");
     default:
-        return token(ERROR, std::string(1, current));
+        return token(UNKNOW, std::string(1, current));
     }
 }
 
@@ -124,7 +124,7 @@ token lexan::get_num(){
         ++position;
 
         if (position >= buffer.length() || !is_digit(buffer[position])) {
-            return token(ERROR, buffer.substr(start, position - start));
+            return token(UNKNOW, buffer.substr(start, position - start));
         }
 
         while (start < buffer.size() && is_digit(buffer[position])) {
@@ -139,7 +139,7 @@ token lexan::get_num(){
     }*/
 
     if (buffer[start] == '0'&&num.size()>1) {
-        return token(ERROR, num);
+        return token(UNKNOW, num);
     }
 
     if (is_float) {

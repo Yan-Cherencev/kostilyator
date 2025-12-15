@@ -31,3 +31,13 @@ void node::print(std::ofstream& out, size_t height){
         child->print(out, height + 1);
     }
 }
+
+node* node::find_child(const std::string& name){ 
+    for (auto it : child) { 
+        if (it->rule == name) {
+            return it;
+        }
+    }
+
+    return nullptr;
+}

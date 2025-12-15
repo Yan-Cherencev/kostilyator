@@ -1,10 +1,8 @@
-PROGRAM my_first_prog
-INT a, b, sum
-REAL x, y
-a = 10
-b = 20
-x = 5.5
-sum = a + b
-antysum = a - b
-CALL print(sum)
-END my_first_prog
+PROGRAM CallTest
+INT x, y,sum
+x = 10
+y = 20
+sum = x+y + (x-y)
+CALL Sum(x, y)
+CALL Print(x)
+END CallTest

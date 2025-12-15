@@ -17,7 +17,7 @@ enum token_type {
     END_OF_FILE,
     
 
-    UNKNOWN, ERROR
+    UNKNOWN, UNKNOW
 };
 
 
@@ -46,7 +46,7 @@ inline std::ostream& operator<<(std::ostream& os, token_type type) {
         case PUNCTUATOR:    return os << "PUNCTUATOR";
         case END_OF_FILE:   return os << "EOF";
         case UNKNOWN:       return os << "UNKNOWN";
-        case ERROR:         return os << "ERROR";
+        case UNKNOW:         return os << "ERROR";
     default:            return os << "UNKNOWN";
     }
 }

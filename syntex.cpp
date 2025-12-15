@@ -1,7 +1,7 @@
 ﻿#include "syntex.h"
 
 bool syntex::is_end()const{
-    return pos>tokens.size()||tokens[pos].type==END_OF_FILE;
+    return pos>=tokens.size()||tokens[pos].type==END_OF_FILE;
 }
 
 bool syntex::check(token_type type) const{
@@ -38,10 +38,11 @@ const token& syntex::next() {
 
 node* syntex::absorb(const token_type& tok, const std::string& rule, const std::string& error){
     if (check(tok)) {
-        return new node(rule, next().value);
+        const token &temp = next();
+        return new node(rule, temp.value, temp.line);
     }
     if (is_end()) {
-        errors.push_back("Line ? : Unexpected End Of File. " + error);
+        errors.push_back("Line ? : Unexpected end of file. " + error);
         //throw std::runtime_error("Line ? : Unexpected End Of File. " + error);
         return nullptr;
     }
@@ -53,11 +54,12 @@ node* syntex::absorb(const token_type& tok, const std::string& rule, const std::
 
 node* syntex::absorb(const std::string& val, const std::string& rule, const std::string& error){
     if (check(val)) {
-        return new node(rule, next().value);
+        const token& temp = next();
+        return new node(rule, temp.value, temp.line);
     }
 
     if (is_end()) {
-        errors.push_back("Line ? : Unexpected End Of File. " + error);
+        errors.push_back("Line ? : Unexpected end of file. " + error);
         //throw std::runtime_error("Line ? : Unexpected End Of File. " + error);
         return nullptr;
     }
