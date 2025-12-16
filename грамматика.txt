@@ -39,21 +39,3 @@ Expr → SimpleExpr ExpTail
 ExpTail → + SimpleExpr ExpTail |- SimpleExpr ExpTail | \0
 Id → id_name
 Const → int_num | real_num
-
-node* syntex::var_list() {
-    node* node_ = new node("VarList");
-
-
-    node_->add(absorb(ID, "id", "expected  id"));
-
-    if (peek(PUNCTUATOR) && tokens[pos].value == ",") {
-
-        node_->add(absorb(PUNCTUATOR, "punctuator", "Expected <<,>>"));
-        node_->add(var_list());
-
-    }
-
-
-
-    return node_;
-}

@@ -90,6 +90,7 @@ void seman::register_vars(node* var_list, data_type type){
 		}
 		else {
 			sym_map[temp] = type;
+			polska += temp + " " + dt_to_str(type) + " DECL \n";
 		}
 	}
 
@@ -151,13 +152,15 @@ void seman::check_op(node* op){
 		node* func_id = op->find_child("id");
 		node* var_list = op->find_child("VarList");
 
-		if (func_id) {
-			std::string func_name = func_id->value;
+		if (var_list) {
+			check_call(var_list);
+		}
 
-			if (var_list) {
-				check_call(var_list);
-			}
+		if (func_id) {
+
+			std::string func_name = func_id->value;
 			polska += func_name + " CALL \n";
+
 		}
 		return;
 	}

@@ -1,7 +1,10 @@
 Polska: 
+x INT DECL 
+y INT DECL 
+sum INT DECL 
 10 x = 
 20 y = 
-x y + x y - + sum = 
+x y + x + y - sum = 
 x y Sum CALL 
 x Print CALL 
 
