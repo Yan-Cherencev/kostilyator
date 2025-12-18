@@ -138,7 +138,7 @@ token lexan::get_num(){
         return token(*type, word);
     }*/
 
-    if (buffer[start] == '0'&&num.size()>1) {
+    if (buffer[start] == '0'&& buffer[start+1]!= '.' && num.size()>1) {
         return token(UNKNOW, num);
     }
 

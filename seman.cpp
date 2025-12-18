@@ -90,7 +90,7 @@ void seman::register_vars(node* var_list, data_type type){
 		}
 		else {
 			sym_map[temp] = type;
-			polska += temp + " " + dt_to_str(type) + " DECL \n";
+			polska += temp + " " + dt_to_str(type) + " DECL \n"; /////-----------------------------------------тнплюрхпнбюмхе пом
 		}
 	}
 
